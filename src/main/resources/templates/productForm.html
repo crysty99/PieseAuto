@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Products form</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+<body>
+
+<div class="container-fluid">
+    <h2 class="text-center">Add new product</h2>
+    <form th:action="@{/products/save}" method="post" th:object="${product}"
+        style="max-width: 600px; margin: auto">
+        <div class="border m-3">
+            <div class="m-3">
+                <label class="form-label">Product name</label>
+                <input type="text" class="form-control" th:field="*{productName}" placeholder="Enter product name" required minlength="1">
+            </div>
+            <div class="m-3">
+                <label class="form-label">Descriptions</label>
+                <input type="text" class="form-control" th:field="*{productDescription}" placeholder="Enter description" required minlength="1">
+            </div>
+            <div class="m-3">
+                <label class="form-label">Number of products</label>
+                <input type="number" min="0" class="form-control" th:field="*{stock}" placeholder="Enter number of products" required minlength="1">
+            </div>
+            <button type="submit" class="btn btn-primary m-3">Add product</button>
+        </div>
+    </form>
+</div>
+
+
+</body>
+</html>

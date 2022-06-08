@@ -17,4 +17,11 @@ public class ProductController {
         model.addAttribute("listProducts", listProducts);
         return "products";
     }
+
+    @GetMapping("/products/new")
+    public String showNewForm(Model model){
+        model.addAttribute("product",new Product());
+        return "productForm";
+    }
+
 }
