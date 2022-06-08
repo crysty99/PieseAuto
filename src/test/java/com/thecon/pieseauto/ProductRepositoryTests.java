@@ -58,4 +58,13 @@ public class ProductRepositoryTests {
         Assertions.assertTrue(optionalProduct.isPresent());
         System.out.println(optionalProduct.get());
     }
+
+    @Test
+    public void testDelete(){
+        int idPiesa = 1;
+        repo.deleteById(idPiesa);
+
+        Optional<Product> optionalProduct = repo.findById(idPiesa);
+        Assertions.assertFalse(optionalProduct.isPresent());
+    }
 }
