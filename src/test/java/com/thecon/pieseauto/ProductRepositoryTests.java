@@ -1,7 +1,7 @@
 package com.thecon.pieseauto;
 
 import com.thecon.pieseauto.product.Product;
-import com.thecon.pieseauto.product.ProductCRUD;
+import com.thecon.pieseauto.product.ProductRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import java.util.Optional;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Rollback(false)
 public class ProductRepositoryTests {
-    @Autowired private ProductCRUD repo;
+    @Autowired private ProductRepository repo;
 
     @Test
     public void testAddNewProduct(){
