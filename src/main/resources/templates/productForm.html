@@ -26,10 +26,16 @@
                 <input type="number" min="0" class="form-control" th:field="*{stock}" placeholder="Enter number of products" required minlength="1">
             </div>
             <button type="submit" class="btn btn-primary m-3">Add product</button>
+            <button type="button" class="btn btn-secondary m-3 float-end" onclick="cancelForm()">Cancel</button>
         </div>
     </form>
 </div>
 
+<script type="text/javascript">
+    function cancelForm(){
+        window.location ="[[@{/products}]]";
+    }
+</script>
 
 </body>
 </html>

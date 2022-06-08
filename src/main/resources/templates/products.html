@@ -10,7 +10,12 @@
 
 <div class="container-fluid text-center">
     <h1>Products</h1>
-    <a class="h3" th:href="@{/products/new/}">Add product</a>
+    <a class="h3 mb-3" th:href="@{/products/new/}">Add product</a>
+
+    <div th:if="${message}" class="alert alert-success text-center">
+        [[${message}]]
+    </div>
+
     <div>
         <table class="table table-bordered">
             <thead class="bg-light">
@@ -30,8 +35,8 @@
                 <td>[[${product.productDescription}]]</td>
                 <td>[[${product.stock}]]</td>
                 <td>
-                    <a class="h4 m-4" th:href="@{'/products/edit/' + ${product.idPiesa}}">Edit</a>
-                    <a class="h4" th:href="@{'/products/delete/' + ${product.idPiesa}}">Delete</a>
+                    <button class="button btn-success m-1" th:href="@{'/products/edit/' + ${product.idPiesa}}">Edit</button>
+                    <button class="button btn-danger m-1" th:href="@{'/products/delete/' + ${product.idPiesa}}">Delete</button>
                 </td>
             </tr>
             </th:block>
