@@ -35,8 +35,8 @@
                 <td>[[${product.productDescription}]]</td>
                 <td>[[${product.stock}]]</td>
                 <td>
-                    <button class="button btn-success m-1" th:href="@{'/products/edit/' + ${product.idPiesa}}">Edit</button>
-                    <button class="button btn-danger m-1" th:href="@{'/products/delete/' + ${product.idPiesa}}">Delete</button>
+                    <a class="button btn-success m-1" th:href="@{'/products/edit/' + ${product.idPiesa}}">Edit</a>
+                    <a class="button btn-danger m-1" th:href="@{'/products/delete/' + ${product.idPiesa}}">Delete</a>
                 </td>
             </tr>
             </th:block>

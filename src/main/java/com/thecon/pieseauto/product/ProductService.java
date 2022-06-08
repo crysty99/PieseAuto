@@ -16,11 +16,11 @@ public class ProductService {
         return (ArrayList<Product>) repo.findAll();
     }
 
-    public void addProduct(Product product) {
+    public void save(Product product) {
         repo.save(product);
     }
 
-    public Product getProduct(int id) throws ProductNotFoundException{
+    public Product get(int id) throws ProductNotFoundException{
         Optional<Product> result = repo.findById(id);
         if(result.isPresent()) {
             return result.get();

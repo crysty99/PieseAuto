@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -23,13 +24,28 @@ public class ProductController {
     @GetMapping("/products/new")
     public String showNewForm(Model model){
         model.addAttribute("product",new Product());
+        model.addAttribute("title", "Add new product");
         return "productForm";
     }
 
     @PostMapping("/products/save")
     public String addProduct(Product product, RedirectAttributes ra){
-        service.addProduct(product);
+        service.save(product);
         ra.addFlashAttribute("message","Product saved succesfully!");
         return "redirect:/products";
+    }
+
+    @GetMapping("/products/edit/{idPiesa}")
+    public String showEditForm(@PathVariable("idPiesa") int id, Model model, RedirectAttributes ra){
+        try {
+            Product product = service.get(id);
+            model.addAttribute("product", product);
+            model.addAttribute("title", "Edit product (ID: "+ id +")");
+            return "productForm";
+        } catch (ProductNotFoundException e) {
+            ra.addFlashAttribute("message","Product saved succesfully!");
+            return "redirect:/products";
+        }
+
     }
 }
