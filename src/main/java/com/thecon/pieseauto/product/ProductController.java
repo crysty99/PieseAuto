@@ -28,7 +28,7 @@ public class ProductController {
 
     @PostMapping("/products/save")
     public String addProduct(Product product, RedirectAttributes ra){
-        service.save(product);
+        service.addProduct(product);
         ra.addFlashAttribute("message","Product saved succesfully!");
         return "redirect:/products";
     }
