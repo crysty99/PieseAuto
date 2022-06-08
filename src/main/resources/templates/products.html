@@ -9,7 +9,35 @@
 <body>
 
 <div class="container-fluid text-center">
-    <h1>Welcome!</h1>
+    <h1>Products</h1>
+    <a class="h3" th:href="@{/products/new/}">Add product</a>
+    <div>
+        <table class="table table-bordered">
+            <thead class="bg-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Product name</th>
+                    <th>Descriptions</th>
+                    <th>status</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="product : ${listProducts}">
+            <tr>
+                <td>[[${product.idPiesa}]]</td>
+                <td>[[${product.productName}]]</td>
+                <td>[[${product.productDescription}]]</td>
+                <td>[[${product.stock}]]</td>
+                <td>
+                    <a class="h4 m-4" th:href="@{'/products/edit/' + ${product.idPiesa}}">Edit</a>
+                    <a class="h4" th:href="@{'/products/delete/' + ${product.idPiesa}}">Delete</a>
+                </td>
+            </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
 
 </div>
 
