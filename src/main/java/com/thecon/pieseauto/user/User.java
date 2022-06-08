@@ -1,8 +1,6 @@
 package com.thecon.pieseauto.user;
 
 import javax.persistence.*;
-import java.sql.Blob;
-import java.util.ArrayList;
 import java.util.Date;
 
 @Entity

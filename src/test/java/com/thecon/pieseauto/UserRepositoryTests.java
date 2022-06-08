@@ -8,9 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
+import org.apache.commons.io.IOUtils;
 
-import java.sql.Date;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Date;
 import java.util.Optional;
+
+import static com.jayway.jsonpath.internal.path.PathCompiler.fail;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -23,8 +28,8 @@ public class UserRepositoryTests {
         User user = new User();
         user.setName("user");
         user.setPassword("user");
-        user.setEmail("usertest222@gmail.com");
-        user.setDateOfBirth(new Date(2000,01,01));
+        user.setEmail("useraaa@gmail.com");
+        user.setDateOfBirth(new Date(99,0,1));
         user.setPhoneNumber("0720000000");
         user.setAddress("address test");
         user.setUserRole("user");
@@ -34,6 +39,26 @@ public class UserRepositoryTests {
         User savedUser= repo.save(user);
 
         Assertions.assertNotNull(savedUser);
+    }
+    @Test
+    public void testAddImage() throws IOException {
+        int idUser = 2;
+        Optional<User> optionalUser = repo.findById(idUser);
+        User user = optionalUser.get();
+
+        InputStream inputStream = this.getClass()
+                .getClassLoader()
+                .getResourceAsStream("poze/poza.png");
+
+        if(inputStream == null) {
+            fail("Unable to get resources");
+        }
+
+        user.setProfileImage(IOUtils.toByteArray(inputStream));
+        repo.save(user);
+
+        User updatedUser= repo.findById(idUser).get();
+        Assertions.assertNotNull(updatedUser.getProfileImage());
     }
 
     @Test
