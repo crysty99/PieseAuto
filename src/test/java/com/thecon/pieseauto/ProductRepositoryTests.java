@@ -50,4 +50,12 @@ public class ProductRepositoryTests {
         Product updatedProduct = repo.findById(idPiesa).get();
         Assertions.assertEquals(updatedProduct.getProductName(),"PiesaUpdateTest");
     }
+
+    @Test
+    public void testGet(){
+        int idPiesa = 1;
+        Optional<Product> optionalProduct = repo.findById(idPiesa);
+        Assertions.assertTrue(optionalProduct.isPresent());
+        System.out.println(optionalProduct.get());
+    }
 }
