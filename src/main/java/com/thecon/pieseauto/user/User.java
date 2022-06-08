@@ -101,4 +101,20 @@ public class User {
     public void setProfileImage(Blob profileImage) {
         this.profileImage = profileImage;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "idUser=" + idUser +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", address='" + address + '\'' +
+                ", userRole='" + userRole + '\'' +
+                ", email='" + email + '\'' +
+                ", active=" + active +
+                ", dateOfBirth=" + dateOfBirth +
+                ", profileImage=" + profileImage +
+                '}';
+    }
 }

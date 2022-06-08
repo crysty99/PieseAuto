@@ -59,7 +59,7 @@ public class ProductRepositoryTests {
         System.out.println(optionalProduct.get());
     }
 
-    @Test
+    //@Test
     public void testDelete(){
         int idPiesa = 1;
         repo.deleteById(idPiesa);
