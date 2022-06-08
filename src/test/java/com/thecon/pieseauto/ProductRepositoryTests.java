@@ -2,14 +2,14 @@ package com.thecon.pieseauto;
 
 import com.thecon.pieseauto.product.Product;
 import com.thecon.pieseauto.product.ProductCRUD;
-import com.thecon.pieseauto.user.User;
-import com.thecon.pieseauto.user.UserCRUD;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
+
+import java.util.Optional;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -27,5 +27,27 @@ public class ProductRepositoryTests {
         Product savedProduct = repo.save(product);
 
         Assertions.assertNotNull(savedProduct);
+    }
+
+    @Test
+    public void testListAll(){
+        Iterable<Product> products = repo.findAll();
+        Assertions.assertNotNull(products);
+
+        for (Product product : products){
+            System.out.println(product);
+        }
+    }
+
+    @Test
+    public void testUpdate(){
+        int idPiesa = 1;
+        Optional<Product> optionalProduct = repo.findById(idPiesa);
+        Product product = optionalProduct.get();
+        product.setProductName("PiesaUpdateTest");
+        repo.save(product);
+
+        Product updatedProduct = repo.findById(idPiesa).get();
+        Assertions.assertEquals(updatedProduct.getProductName(),"PiesaUpdateTest");
     }
 }
