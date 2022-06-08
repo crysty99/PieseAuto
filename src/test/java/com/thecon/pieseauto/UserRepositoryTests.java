@@ -9,7 +9,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.Optional;
 
 @DataJpaTest
@@ -23,9 +23,11 @@ public class UserRepositoryTests {
         User user = new User();
         user.setName("user");
         user.setPassword("user");
-        user.setEmail("user@gmail.com");
-        user.setDateOfBirth(new Date(2000,01, 01));
+        user.setEmail("usertest222@gmail.com");
+        user.setDateOfBirth(new Date(2000,01,01));
         user.setPhoneNumber("0720000000");
+        user.setAddress("address test");
+        user.setUserRole("user");
         //user.setProfileImage("/poza.png");
         user.setActive(true);
 
@@ -46,7 +48,7 @@ public class UserRepositoryTests {
 
     @Test
     public void testUpdate(){
-        int idUser = 1;
+        int idUser = 2;
         Optional<User> optionalUser = repo.findById(idUser);
         User user = optionalUser.get();
         user.setPhoneNumber("000000");

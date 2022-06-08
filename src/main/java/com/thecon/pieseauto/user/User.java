@@ -17,10 +17,20 @@ public class User {
     private String email;
     @Column
     private boolean active;
+    @Temporal(TemporalType.DATE)
     @Column
     private Date dateOfBirth;
     @Lob
-    private Blob profileImage;
+    @Column
+    private byte[] profileImage;
+
+    public void setProfileImage(byte[] profileImage) {
+        this.profileImage = profileImage;
+    }
+
+    public byte[] getProfileImage() {
+        return profileImage;
+    }
 
     public int getIdUser() {
         return idUser;
@@ -92,14 +102,6 @@ public class User {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
-    }
-
-    public Blob getProfileImage() {
-        return profileImage;
-    }
-
-    public void setProfileImage(Blob profileImage) {
-        this.profileImage = profileImage;
     }
 
     @Override
