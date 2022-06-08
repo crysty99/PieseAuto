@@ -43,9 +43,20 @@ public class ProductController {
             model.addAttribute("title", "Edit product (ID: "+ id +")");
             return "productForm";
         } catch (ProductNotFoundException e) {
-            ra.addFlashAttribute("message","Product saved succesfully!");
+            ra.addFlashAttribute("message",e.getMessage());
             return "redirect:/products";
         }
-
     }
+
+    @GetMapping("/products/delete/{idPiesa}")
+    public String deleteProduct(@PathVariable("idPiesa") int id, RedirectAttributes ra){
+        try {
+            service.delete(id);
+            ra.addFlashAttribute("message", "Product (ID: "+id+") deleted succesfully!");
+        } catch (ProductNotFoundException e) {
+            ra.addFlashAttribute("message",e.getMessage());
+        }
+        return "redirect:/products";
+    }
+
 }

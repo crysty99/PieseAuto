@@ -27,4 +27,12 @@ public class ProductService {
         }
         throw new ProductNotFoundException("No products with id " + id);
     }
+
+    public void delete(int id) throws ProductNotFoundException {
+        Long count = repo.countByIdPiesa(id);
+        if(count == null || count == 0){
+            throw new ProductNotFoundException("No products with id " + id);
+        }
+        repo.deleteById(id);
+    }
 }
