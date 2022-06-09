@@ -83,20 +83,28 @@ public class ProductRepositoryTests {
 
     @Test
     public void testBuyList(){
-        int idPiesa1 = 2;
+        int idPiesa1 = 1;
         int idPiesa2 = 3;
+        int newStock;
         ArrayList<Integer> ids = new ArrayList<Integer>();
         ids.add(idPiesa1);
         ids.add(idPiesa2);
 
+        Product product;
         Iterable<Product> iterableProduct = repo.findAllById(ids);
-        while(iterableProduct.iterator().hasNext()){
-            Product product = iterableProduct.iterator().next();
-            product.setStock(product.getStock()-1);
-            repo.save(product);
+        Iterator<Product> it = iterableProduct.iterator();
+        while(it.hasNext()){
+            product = it.next();
+            if(product.getStock() > 0){
+                newStock = product.getStock()-1;
+                product.setStock(newStock);
+                repo.save(product);
+                System.out.println(product.getProductName() + " " + product.getStock());
+                Assertions.assertEquals(product.getStock(),newStock);
+            } else {
+                System.out.println(product.getProductName() + " out of stock");
+                Assertions.assertEquals(product.getStock(),0);
+            }
         }
-        Optional<Product> optionalProduct2 = repo.findById(idPiesa2);
-        Product product2 = optionalProduct2.get();
-        Assertions.assertEquals(product2.getStock(),37);
     }
 }
