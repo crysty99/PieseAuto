@@ -29,9 +29,9 @@ public class ProductController {
     }
 
     @PostMapping("/products/save")
-    public String addProduct(Product product, RedirectAttributes ra){
+    public String saveProduct(Product product, RedirectAttributes ra){
         service.save(product);
-        ra.addFlashAttribute("message","Product saved succesfully!");
+        ra.addFlashAttribute("message","Product saved successfully!");
         return "redirect:/products";
     }
 
@@ -52,7 +52,7 @@ public class ProductController {
     public String deleteProduct(@PathVariable("idPiesa") int id, RedirectAttributes ra){
         try {
             service.delete(id);
-            ra.addFlashAttribute("message", "Product (ID: "+id+") deleted succesfully!");
+            ra.addFlashAttribute("message", "Product (ID: "+id+") deleted successfully!");
         } catch (ProductNotFoundException e) {
             ra.addFlashAttribute("message",e.getMessage());
         }

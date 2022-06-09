@@ -14,7 +14,9 @@ public class UserService {
     public ArrayList<User> listAll() {
         return (ArrayList<User>) repo.findAll();
     }
-
+    public void save(User user) {
+        repo.save(user);
+    }
     public User get(int id) throws UserNotFoundException {
         Optional<User> result = repo.findById(id);
         if(result.isPresent()) {
@@ -30,4 +32,5 @@ public class UserService {
         }
         repo.deleteById(id);
     }
+
 }

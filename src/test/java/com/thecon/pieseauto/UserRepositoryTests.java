@@ -42,13 +42,13 @@ public class UserRepositoryTests {
     }
     @Test
     public void testAddImage() throws IOException {
-        int idUser = 2;
+        int idUser = 3;
         Optional<User> optionalUser = repo.findById(idUser);
         User user = optionalUser.get();
 
         InputStream inputStream = this.getClass()
                 .getClassLoader()
-                .getResourceAsStream("poze/poza.png");
+                .getResourceAsStream("poze/poza2.png");
 
         if(inputStream == null) {
             fail("Unable to get resources");
