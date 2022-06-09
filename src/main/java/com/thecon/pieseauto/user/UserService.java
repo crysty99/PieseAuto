@@ -1,7 +1,5 @@
 package com.thecon.pieseauto.user;
 
-import com.thecon.pieseauto.product.Product;
-import com.thecon.pieseauto.product.ProductNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
