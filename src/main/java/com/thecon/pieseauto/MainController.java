@@ -17,4 +17,10 @@ public class MainController {
         return "login";
     }
 
+    @GetMapping("/account")
+    public String showAccountPage() {
+
+        return "accountDetails";
+    }
+
 }

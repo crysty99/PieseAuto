@@ -9,6 +9,7 @@
 </head>
 <body>
 
+<span sec:authorize="hasAnyAuthority('admin')">
 <div class="container-fluid text-center">
     <h1>Users</h1>
     <a class="h3 mb-3" th:href="@{/home}">Home</a>
@@ -63,7 +64,7 @@
     </div>
 
 </div>
-
+</span>
 
 </body>
 </html>
