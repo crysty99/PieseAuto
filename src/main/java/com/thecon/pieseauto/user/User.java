@@ -1,7 +1,10 @@
 package com.thecon.pieseauto.user;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -10,18 +13,25 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idUser;
     @Column(nullable = false)
-    private String name,password, phoneNumber,address, userRole;
+    private String name,password, phoneNumber,address;
+
     @Column(nullable = false, unique = true)
     private String email;
     @Column
-    private boolean active;
+    private boolean enabled;
     @Temporal(TemporalType.DATE)
     @Column
     private Date dateOfBirth;
     @Lob
     @Column
     private byte[] profileImage;
-
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "id_user"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
     public void setProfileImage(byte[] profileImage) {
         this.profileImage = profileImage;
     }
@@ -70,13 +80,6 @@ public class User {
         this.address = address;
     }
 
-    public String getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(String userRole) {
-        this.userRole = userRole;
-    }
 
     public String getEmail() {
         return email;
@@ -84,14 +87,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
     }
 
     public Date getDateOfBirth() {
@@ -102,6 +97,22 @@ public class User {
         this.dateOfBirth = dateOfBirth;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -110,11 +121,11 @@ public class User {
                 ", password='" + password + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", address='" + address + '\'' +
-                ", userRole='" + userRole + '\'' +
                 ", email='" + email + '\'' +
-                ", active=" + active +
+                ", enabled=" + enabled +
                 ", dateOfBirth=" + dateOfBirth +
-                ", profileImage=" + profileImage +
+                ", profileImage=" + Arrays.toString(profileImage) +
+                ", roles=" + roles +
                 '}';
     }
 }

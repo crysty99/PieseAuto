@@ -32,9 +32,9 @@ public class UserRepositoryTests {
         user.setDateOfBirth(new Date(99,0,1));
         user.setPhoneNumber("0720000000");
         user.setAddress("address test");
-        user.setUserRole("user");
+        //user.setRoles("admin");
         //user.setProfileImage("/poza.png");
-        user.setActive(true);
+        user.setEnabled(true);
 
         User savedUser= repo.save(user);
 
