@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>[[${title}]]</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+<body>
+
+<div class="container-fluid">
+    <h2 class="text-center">[[${title}]]</h2>
+    <form th:action="@{/users/save}" method="post"
+        style="max-width: 600px; margin: auto">
+
+        <input  type="hidden" th:field="${ID}">
+
+        <div class="border m-3">
+            <div class="m-3">
+                <label class="form-label">Address</label>
+                <input type="text" class="form-control" th:object="${address}" placeholder="Enter address" required minlength="1">
+            </div>
+            <button type="submit" class="btn btn-primary m-3">Save</button>
+            <button type="button" class="btn btn-secondary m-3 float-end" onclick="cancelForm()">Cancel</button>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    function cancelForm(){
+        window.location ="[[@{/users}]]";
+    }
+</script>
+
+</body>
+</html>

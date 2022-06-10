@@ -10,7 +10,7 @@
 
 <div class="container-fluid text-center">
     <h1>Users</h1>
-
+    <a class="h3 mb-3" th:href="@{/home}">Home</a>
     <div th:if="${message}" class="alert alert-success text-center">
         [[${message}]]
     </div>
@@ -45,7 +45,11 @@
                     <td>[[${user.active}]]</td>
                     <td>
                         <a class="button btn-success m-1" th:href="@{'/users/edit/' + ${user.idUser}}">Edit</a>
-                        <a class="button btn-danger m-1" th:href="@{'/users/delete/' + ${user.idUser}}">Delete</a>
+                        <a class="button btn-success m-1" th:href="@{'/users/editImage/' + ${user.idUser}}">Update Image</a>
+                        <a class="button btn-success m-1" th:href="@{'/users/editAddress/' + ${user.idUser}}">Update address</a>
+                        <span th:if="${user.userRole != 'admin'}">
+                            <a class="button btn-danger m-1" th:href="@{'/users/delete/' + ${user.idUser}}">Delete</a>
+                        </span>
                     </td>
                 </tr>
             </th:block>

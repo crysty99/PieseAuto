@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends JpaRepository<User, Integer>{
 
     public Long countByIdUser(Integer id);
-    public Long getUserByNameAndEmail(String name, String email);
+    public User getUserByNameAndEmail(String name, String email);
     public Long deleteUserByIdUser(Integer id);
-
+    public User getUserByName(String name);
 }

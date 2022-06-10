@@ -11,7 +11,7 @@
 <div class="container-fluid text-center">
     <h1>Products</h1>
     <a class="h3 mb-3" th:href="@{/products/new/}">Add product</a>
-
+    <a class="h3 mb-3" th:href="@{/home}">Home</a>
     <div th:if="${message}" class="alert alert-success text-center">
         [[${message}]]
     </div>
@@ -45,7 +45,6 @@
     </div>
 
 </div>
-
 
 </body>
 </html>
