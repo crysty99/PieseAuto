@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +11,12 @@
 
 <div class="container-fluid text-center">
     <h1>Products</h1>
-    <a class="h3 mb-3" th:href="@{/products/new/}">Add product</a>
+    <span sec:authorize="hasAnyAuthority('admin')">
+        <a class="h3 mb-3" th:href="@{/products/new/}">Add product</a>
+    </span>
+    <span sec:authorize="hasAnyAuthority('user')">
+        <a class="h3 mb-3">Buy list</a>
+    </span>
     <a class="h3 mb-3" th:href="@{/home}">Home</a>
     <div th:if="${message}" class="alert alert-success text-center">
         [[${message}]]
@@ -35,8 +41,13 @@
                 <td>[[${product.productDescription}]]</td>
                 <td>[[${product.stock}]]</td>
                 <td>
-                    <a class="button btn-success m-1" th:href="@{'/products/edit/' + ${product.idPiesa}}">Edit</a>
-                    <a class="button btn-danger m-1" th:href="@{'/products/delete/' + ${product.idPiesa}}">Delete</a>
+                    <span sec:authorize="hasAnyAuthority('admin')">
+                        <a class="button btn-success m-1" th:href="@{'/products/edit/' + ${product.idPiesa}}">Edit</a>
+                        <a class="button btn-danger m-1" th:href="@{'/products/delete/' + ${product.idPiesa}}">Delete</a>
+                    </span>
+                    <span sec:authorize="hasAnyAuthority('user')">
+                        <a class="button btn-success m-1" >Add to cart</a>
+                    </span>
                 </td>
             </tr>
             </th:block>

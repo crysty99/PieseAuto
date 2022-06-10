@@ -1,5 +1,6 @@
 package com.thecon.pieseauto;
 
+import com.thecon.pieseauto.user.Role;
 import com.thecon.pieseauto.user.User;
 import com.thecon.pieseauto.user.UserRepository;
 import org.junit.jupiter.api.Assertions;
@@ -27,13 +28,14 @@ public class UserRepositoryTests {
     @Test
     public void testAddNewUser(){
         User user = new User();
+        Role role = new Role();
         user.setName("user");
         user.setPassword("user");
         user.setEmail("useraaa@gmail.com");
         user.setDateOfBirth(new Date(99,0,1));
         user.setPhoneNumber("0720000000");
         user.setAddress("address test");
-        //user.setRoles("admin");
+        //role.setName("test");
         //user.setProfileImage("/poza.png");
         user.setEnabled(true);
 

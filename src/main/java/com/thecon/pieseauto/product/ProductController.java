@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
@@ -21,21 +22,21 @@ public class ProductController {
         return "products";
     }
 
-    @GetMapping("/products/new")
+    @RequestMapping("/products/new")
     public String showNewForm(Model model){
         model.addAttribute("product",new Product());
         model.addAttribute("title", "Add new product");
         return "productForm";
     }
 
-    @PostMapping("/products/save")
+    @RequestMapping("/products/save")
     public String saveProduct(Product product, RedirectAttributes ra){
         service.save(product);
         ra.addFlashAttribute("message","Product saved successfully!");
         return "redirect:/products";
     }
 
-    @GetMapping("/products/edit/{idPiesa}")
+    @RequestMapping("/products/edit/{idPiesa}")
     public String showEditForm(@PathVariable("idPiesa") int id, Model model, RedirectAttributes ra){
         try {
             Product product = service.get(id);
@@ -48,7 +49,7 @@ public class ProductController {
         }
     }
 
-    @GetMapping("/products/delete/{idPiesa}")
+    @RequestMapping("/products/delete/{idPiesa}")
     public String deleteProduct(@PathVariable("idPiesa") int id, RedirectAttributes ra){
         try {
             service.delete(id);

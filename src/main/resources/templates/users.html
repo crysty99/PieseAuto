@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -40,15 +41,19 @@
                     <td>[[${user.dateOfBirth}]]</td>
                     <td>[[${user.phoneNumber}]]</td>
                     <td>[[${user.address}]]</td>
-                    <td>[[${user.userRole}]]</td>
+                    <td></td>
                     <td><img th:src="@{${'/users/displayImage/'+ user.idUser}}" alt=""></td>
-                    <td>[[${user.active}]]</td>
+                    <td>[[${user.enabled}]]</td>
                     <td>
-                        <a class="button btn-success m-1" th:href="@{'/users/edit/' + ${user.idUser}}">Edit</a>
-                        <a class="button btn-success m-1" th:href="@{'/users/editImage/' + ${user.idUser}}">Update Image</a>
-                        <a class="button btn-success m-1" th:href="@{'/users/editAddress/' + ${user.idUser}}">Update address</a>
-                        <span th:if="${user.userRole != 'admin'}">
+                        <span sec:authorize="hasAnyAuthority('admin')">
+                            <a class="button btn-success m-1" th:href="@{'/users/edit/' + ${user.idUser}}">Edit</a>
                             <a class="button btn-danger m-1" th:href="@{'/users/delete/' + ${user.idUser}}">Delete</a>
+                            <a class="button btn-success m-1" th:href="@{'/users/editImage/' + ${user.idUser}}">Update Image</a>
+                            <a class="button btn-success m-1" th:href="@{'/users/editAddress/' + ${user.idUser}}">Update address</a>
+                        </span>
+
+                        <span th:if="${user.roles != 'admin'}">
+
                         </span>
                     </td>
                 </tr>
