@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.annotation.Rollback;
 import org.apache.commons.io.IOUtils;
 
@@ -69,6 +70,16 @@ public class UserRepositoryTests {
         for (User user : users){
             System.out.println(users);
         }
+    }
+    @Test
+    public void encryptPass(){
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String rawPassword = "user";
+        String encodedPassword = encoder.encode(rawPassword);
+
+        System.out.println(encodedPassword);
+
+        Assertions.assertNotEquals(rawPassword,encodedPassword);
     }
 
     @Test
