@@ -56,7 +56,7 @@ public class UserController {
     public String updateProfileImage(@PathVariable("idUser") int id, Model model, RedirectAttributes ra){
         try {
             byte[] img = service.get(id).getProfileImage();
-            model.addAttribute("img", img);
+            model.addAttribute("image", img);
             model.addAttribute("title", "Edit user (ID: "+ id +")");
             return "userFormImage";
         } catch (UserNotFoundException e) {
@@ -87,6 +87,13 @@ public class UserController {
         return "redirect:/users";
     }
 
+    @PostMapping("/users/saveImage/{idUser}{profileImage}")
+    public String saveImage(@PathVariable("idUser") int id, RedirectAttributes ra, @PathVariable("profileImage") byte[] profileImage) throws UserNotFoundException {
+        service.get(id).setProfileImage(profileImage);
+        ra.addFlashAttribute("message","Image saved successfully!");
+        return "redirect:/users";
+    }
+
     @GetMapping("/users/delete/{idUser}")
     public String deleteUser(@PathVariable("idUser") int id, RedirectAttributes ra){
         try {
@@ -107,5 +114,6 @@ public class UserController {
         response.getOutputStream().write(user.getProfileImage());
         response.getOutputStream().close();
     }
+
 
 }

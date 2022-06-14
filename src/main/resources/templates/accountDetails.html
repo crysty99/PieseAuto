@@ -4,60 +4,26 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Account</title>
+    <title>Account details</title>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 </head>
 <body>
 
-<div class="container-fluid">
-    <h2 class="text-center">Account</h2>
-    <form th:action="@{/users/save}" method="post"
-          style="max-width: 600px; margin: auto">
-
-
-
-        <div class="border m-3">
-            <div class="m-3">
-                <label class="form-label">Name</label>
-                <input type="text" class="form-control"  placeholder="Enter name" required minlength="1">
-            </div>
-            <!--
-            <div class="m-3">
-                <label class="form-label">Password</label>
-                <input type="password" class="form-control" th:field="*{password}" placeholder="Enter password" required minlength="1">
-            </div>
-
-            <div class="m-3">
-                <label class="form-label">E-mail</label>
-                <input type="email" min="0" class="form-control" th:field="*{email}" placeholder="Enter e-mail" required minlength="1">
-            </div>
-
-            <div class="m-3">
-                <label class="form-label">Date of Birth</label>
-                <input type="date" min="0" class="form-control" th:field="*{dateOfBirth}" placeholder="Enter date" required minlength="1">
-            </div>
-
-            <div class="m-3">
-                <label class="form-label">Address</label>
-                <input type="text" min="0" class="form-control" th:field="*{address}" placeholder="Enter address" required minlength="1">
-            </div>
-            <div class="m-3">
-                <label class="form-label">Phone</label>
-                <input type="text" min="0" class="form-control" th:field="*{phoneNumber}" placeholder="Enter phone" required minlength="1">
-            </div>
-            <div class="m-3">
-                <label class="form-label">Profile Image</label>
-                <input type="file" class="form-control" placeholder="" th:field="*{profileImage}" required="required">
-            </div>
-            -->
-            <button type="submit" class="btn btn-primary m-3">Save</button>
-            <button type="button" class="btn btn-secondary m-3 float-end" onclick="cancelForm()">Cancel</button>
-        </div>
-    </form>
+<div class="container-fluid" sec:authorize="isAuthenticated()">
+    <h2 class="text-center">Account details</h2>
+  &nbsp;
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Name: <span sec:authentication="name"></span><a class="float-end"> Update </a></li>
+        <li class="list-group-item">Email: <span sec:authentication="principal.user.email"></span><a class="float-end"> Update </a></li>
+        <li class="list-group-item">Phone: <span sec:authentication="principal.user.phoneNumber"></span><a class="float-end"> Update </a></li>
+        <li class="list-group-item">Address: <span sec:authentication="principal.user.address"></span><a class="float-end"> Update </a></li>
+        <li class="list-group-item">Profile Image: <span sec:authentication="principal.user.profileImage"></span><a class="float-end"> Update </a></li>
+    </ul>
+    <button class="m-3 btn-primary" onclick="back()">Return Home</button>
 </div>
 
 <script type="text/javascript">
-    function cancelForm(){
+    function back(){
         window.location ="[[@{/home}]]";
     }
 </script>
